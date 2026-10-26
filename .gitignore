@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+
+# Personal data: never commit a raw Math Academy activity log
+ma-activity*.json
+*activity*.json

@@ -1,0 +1,15 @@
+{
+	"manifest_version": 3,
+	"name": "MA Field Guide: Knowledge Graph Export",
+	"version": "1.0.0",
+	"description": "Saves your Math Academy activity as a small file for the MA Field Guide knowledge graph. Nothing leaves your browser.",
+	"action": {
+		"default_title": "Export my Math Academy activity",
+		"default_popup": "popup.html",
+		"default_icon": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+	},
+	"icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" },
+	"permissions": ["scripting", "storage"],
+	"background": { "service_worker": "background.js" },
+	"host_permissions": ["https://mathacademy.com/*", "https://www.mathacademy.com/*"]
+}

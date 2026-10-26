@@ -1,0 +1,24 @@
+name: Bug report
+description: Something does not work
+labels: [bug]
+body:
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: Chrome 130, Firefox 140, Edge ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Extension version (shown in the popup)
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you pressed, and what the popup said. Please do not attach your ma-activity.json.
+    validations:
+      required: true

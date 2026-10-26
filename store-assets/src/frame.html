@@ -1,0 +1,110 @@
+<!doctype html><meta charset="utf-8" />
+<style>
+	* {
+		box-sizing: border-box;
+	}
+	body {
+		margin: 0;
+		width: 1280px;
+		height: 800px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 90px;
+		padding: 0 90px;
+		background: linear-gradient(135deg, #4c4fd6, #0a84d8);
+		font-family:
+			'Inter',
+			ui-sans-serif,
+			system-ui,
+			-apple-system,
+			'Segoe UI',
+			Roboto,
+			sans-serif;
+		color: #fff;
+		overflow: hidden;
+	}
+	.t {
+		flex: 1;
+	}
+	h1 {
+		font-weight: 700;
+		font-size: 54px;
+		line-height: 1.1;
+		margin: 0 0 20px;
+		letter-spacing: -0.03em;
+	}
+	p {
+		font-size: 24px;
+		line-height: 1.45;
+		margin: 0;
+		opacity: 0.92;
+	}
+	.fine {
+		margin-top: 36px;
+		font-size: 16px;
+		opacity: 0.7;
+	}
+	.pop {
+		border-radius: 18px;
+		overflow: hidden;
+		box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+		background: #fff;
+		flex: none;
+	}
+	iframe {
+		display: block;
+		border: 0;
+		width: 320px;
+		transform: scale(var(--z));
+		transform-origin: 0 0;
+	}
+	.box {
+		width: calc(320px * var(--z));
+		height: var(--h);
+	}
+</style>
+<body>
+	<div class="t">
+		<h1 id="h"></h1>
+		<p id="p"></p>
+		<p class="fine">Unofficial: not affiliated with Math Academy.</p>
+	</div>
+	<div class="pop">
+		<div class="box" id="box"><iframe id="f"></iframe></div>
+	</div>
+	<script>
+		var S = {
+			first: [
+				'Save your Math Academy history in one click',
+				'Open your Math Academy page, press the button, and get one small file for the knowledge graph.',
+				410,
+			],
+			stale: [
+				'It tells you when there is something new',
+				'The icon badge and the popup show how many tasks have been completed since your last export.',
+				470,
+			],
+			saved: [
+				'Updates only fetch what is new',
+				'Your last export is remembered in your browser, so the next sync takes seconds.',
+				500,
+			],
+			details: [
+				'See exactly what it saves',
+				'Task types, points, times and topics. No name, email, questions or answers. Nothing is sent anywhere.',
+				640,
+				1.15,
+			],
+		};
+		var k = location.hash.slice(1) || 'first',
+			s = S[k];
+		h.textContent = s[0];
+		p.textContent = s[1];
+		var z = s[3] || 1.5;
+		box.style.setProperty('--z', z);
+		f.src = 'popup.html#' + k;
+		f.style.height = s[2] + 'px';
+		box.style.setProperty('--h', s[2] * z + 'px');
+	</script>
+</body>

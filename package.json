@@ -1,0 +1,20 @@
+{
+	"name": "ma-field-guide-extension",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"description": "Browser extension that exports your own Math Academy activity as a file for the MA Field Guide knowledge graph.",
+	"license": "MIT",
+	"engines": {
+		"node": ">=22.19.0"
+	},
+	"scripts": {
+		"build": "node scripts/build.mjs",
+		"test": "node --experimental-strip-types --disable-warning=ExperimentalWarning --test test/*.test.ts",
+		"format": "prettier --write .",
+		"format:check": "prettier --check ."
+	},
+	"devDependencies": {
+		"prettier": "^3.9.9"
+	}
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>MA Field Guide export</title>
+		<link rel="stylesheet" href="popup.css" />
+	</head>
+	<body>
+		<header>
+			<img src="icons/48.png" alt="" width="32" height="32" />
+			<div>
+				<h1>Knowledge Graph Export</h1>
+				<p class="tag">by the MA Field Guide · <span id="ver"></span></p>
+			</div>
+		</header>
+		<p id="state" class="state" hidden></p>
+		<p id="msg" class="msg">
+			Open your
+			<a href="https://mathacademy.com/learn" target="_blank" rel="noopener">Math Academy page</a>
+			while signed in, then press the button. This saves one small file to your Downloads folder. Next time it
+			only fetches what is new.
+		</p>
+		<button id="go" type="button">Export my activity</button>
+		<a id="resync" class="resync" href="#" hidden>Start over with a full export</a>
+		<div id="bar" class="bar" hidden><span></span></div>
+		<a id="site" class="site" href="https://mafieldguide.com/graph/#upload" target="_blank" rel="noopener"
+			>Open the graph page to upload →</a
+		>
+		<details>
+			<summary>What does it save?</summary>
+			<h2>Saved</h2>
+			<ul>
+				<li>Each completed task’s type (lesson, review, quiz…)</li>
+				<li>Points and points earned</li>
+				<li>When it started and finished</li>
+				<li>The topic, its prerequisite topics, and the course</li>
+				<li>
+					For each topic you have practised: Math Academy’s memory half-life and how many times it counts as
+					practised (one request per course)
+				</li>
+			</ul>
+			<h2>Left out</h2>
+			<ul>
+				<li>Your name, email or account details</li>
+				<li>Your student number: used only to ask Math Academy about your own memory levels, never saved</li>
+				<li>Questions, answers and how long you took on each</li>
+				<li>Anything not listed under Saved</li>
+			</ul>
+			<p>
+				The extension talks only to Math Academy’s own site, from your signed-in tab, and writes the file to
+				your computer. To make updates quick it keeps a copy of your last export in the extension’s own
+				storage in your browser; removing the extension deletes it. Nothing is sent to the MA Field Guide.
+			</p>
+		</details>
+		<script src="popup.js"></script>
+	</body>
+</html>
