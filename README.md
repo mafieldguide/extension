@@ -1,7 +1,7 @@
 # MA Field Guide exporter
 
 A browser extension that saves your own [Math Academy](https://mathacademy.com) activity, and Math Academy's memory
-level for each topic you have practised, as one small file (`ma-activity.json`) for the MA Field Guide knowledge graph.
+level for each topic you have practised and the topic list of each course you have studied, as one small file (`ma-activity.json`) for the MA Field Guide knowledge graph.
 
 MA Field Guide is an independent community project. It is not affiliated with, endorsed by, or speaking for Math
 Academy.

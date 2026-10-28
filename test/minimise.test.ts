@@ -67,3 +67,27 @@ test('odd input never throws and never carries unknown fields through', () => {
 	assert.equal(out.topic, null);
 	assert.equal('email' in out, false);
 });
+
+test('a course keeps its whole topic list, practised or not, as id, name and prerequisite ids only', () => {
+	const list = (globalThis as unknown as { __makgMinimise: { courseTopics: (r: unknown) => unknown } })
+		.__makgMinimise.courseTopics;
+	const topics = {
+		1: {
+			id: 1,
+			name: 'A',
+			repetition: 3,
+			halfLife: 10,
+			unit: 'x',
+			prerequisites: [2, { id: 3, name: 'C' }, 2, 'bad'],
+		},
+		2: { id: 2, repetition: 0, halfLife: 0 },
+		3: { name: 'no id' },
+		4: null,
+	};
+	assert.deepEqual(list({ result: true, topics }), [
+		[1, 'A', [2, 3]],
+		[2, null, []],
+	]);
+	assert.deepEqual(list(null), []);
+	assert.deepEqual(list({ topics: 'nope' }), []);
+});

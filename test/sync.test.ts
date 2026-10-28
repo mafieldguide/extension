@@ -216,8 +216,30 @@ test('with a student number each course is asked once and only the memory number
 	assert.deepEqual(asked.length, 2, 'one request per course');
 	assert.ok(asked.every((u) => u.includes('/students/4321/knowledge-graph')));
 	assert.deepEqual([r.memory, r.topics], ['ok', 2]);
-	const file = downloads[0] as unknown as { tasks: unknown[]; topics: Record<string, unknown>[] };
+	const file = downloads[0] as unknown as {
+		tasks: unknown[];
+		topics: Record<string, unknown>[];
+		courses: { id: number; topics: [number, string | null, number[]][] }[];
+	};
 	assert.equal(file.tasks.length, 20);
+	// Each course keeps its whole topic list (the never-practised one included) as [id, name, prerequisite ids], and
+	// nothing about how the learner is doing in it
+	const whole = [
+		[1, 'Secret name', [5]],
+		[2, 'Forever', []],
+		[99, 'Never practised', []],
+	];
+	assert.deepEqual(
+		file.courses.sort((a, b) => a.id - b.id).map((c) => [c.id, c.topics.sort((x, y) => x[0] - y[0])]),
+		[
+			[7, whole],
+			[8, whole],
+		],
+	);
+	assert.ok(
+		!/halfLife|repetition|frontier/.test(JSON.stringify(file.courses)),
+		'no memory numbers in the lists',
+	);
 	assert.deepEqual(
 		file.topics.sort((a, b) => (a.id as number) - (b.id as number)),
 		[

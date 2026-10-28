@@ -7,8 +7,8 @@ send anything to the MA Field Guide, or to anyone else.
 
 - It runs only on `mathacademy.com`, in the tab where you are already signed in, when you press its button. It uses
   that tab's own sign-in; it never sees or stores your password.
-- It asks Math Academy for your completed task history, a page at a time, and for the memory levels of the topics you
-  have practised (one request per course, half a second apart).
+- It asks Math Academy for your completed task history, a page at a time, and for the memory levels and the topic list of
+  each course you have studied (one request per course, half a second apart).
 - It writes the result to `ma-activity.json` in your Downloads folder. You choose whether to give that file to the
   knowledge graph page, which reads it in your browser.
 
@@ -17,6 +17,9 @@ send anything to the MA Field Guide, or to anyone else.
 - Each completed task's type (lesson, review, quiz, ...), its points and points earned, and when it started and finished
 - The topic, its prerequisite topics, and the course
 - For each topic you have practised: Math Academy's memory half-life and how many times it counts as practised
+- For each course you have studied: its whole topic list, with each topic's name and prerequisites, including topics
+  you have not started (so the graph can draw the whole course and not only the part you have done). This is Math
+  Academy's public course structure, the same for every learner
 
 ## What it leaves out
 

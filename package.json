@@ -1,6 +1,6 @@
 {
 	"name": "ma-field-guide-extension",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"private": true,
 	"type": "module",
 	"description": "Browser extension that exports your own Math Academy activity as a file for the MA Field Guide knowledge graph.",

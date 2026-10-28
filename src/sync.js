@@ -91,6 +91,7 @@
 		// Math Academy's own half-life and practice count per topic, from one request per course. If any of it fails
 		// the export still works: the graph then estimates memory from the activity alone.
 		var topics = [];
+		var courses = [];
 		var memory = 'skipped';
 		if (typeof studentId === 'number' && isFinite(studentId)) {
 			tasks.forEach(function (t) {
@@ -98,6 +99,7 @@
 				if (typeof id === 'number' && courseIds.indexOf(id) < 0) courseIds.push(id);
 			});
 			var byId = new Map();
+			var lists = [];
 			var failed = 0;
 			for (var i = 0; i < courseIds.length; i++) {
 				try {
@@ -107,6 +109,8 @@
 				} catch (e) {}
 				try {
 					var response = await api.fetchBatch(api.courseUrl(courseIds[i], studentId));
+					var list = minimise.courseTopics(response);
+					if (list.length) lists.push({ id: courseIds[i], topics: list });
 					minimise.topics(response).forEach(function (t) {
 						byId.set(t.id, t);
 					});
@@ -117,6 +121,7 @@
 				await api.sleep(500);
 			}
 			topics = Array.from(byId.values());
+			courses = lists;
 			memory = !topics.length ? 'failed' : failed ? 'partial' : 'ok';
 		}
 
@@ -128,8 +133,15 @@
 				tasks: tasks,
 			},
 		});
-		// A bare list when there is no memory data, so the file matches what older versions made
-		sync.download(topics.length ? { tasks: tasks, topics: topics } : tasks);
+		// A bare list when there is no memory data, so the file matches what older versions made. `courses` is each course's
+		// whole topic list, so the graph can draw a course in full and not only the part you have practised.
+		sync.download(
+			topics.length
+				? courses.length
+					? { tasks: tasks, topics: topics, courses: courses }
+					: { tasks: tasks, topics: topics }
+				: tasks,
+		);
 		return {
 			count: tasks.length,
 			added: prior ? tasks.length - before : tasks.length,

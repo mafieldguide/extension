@@ -53,6 +53,27 @@
 		});
 		return out;
 	}
+	/**
+	 * One course's whole topic list from the same response, practised or not: [[id, name, [prerequisite ids]]]. Only
+	 * the structure of the course is kept, nothing about how you are doing in it.
+	 */
+	function courseTopics(response) {
+		var topics = response && response.topics;
+		if (!topics || typeof topics !== 'object') return [];
+		var out = [];
+		Object.keys(topics).forEach(function (key) {
+			var t = topics[key];
+			if (!t || typeof t.id !== 'number') return;
+			var prereqs = [];
+			(Array.isArray(t.prerequisites) ? t.prerequisites : []).forEach(function (p) {
+				var id = p && typeof p === 'object' ? p.id : p;
+				if (typeof id === 'number' && prereqs.indexOf(id) < 0) prereqs.push(id);
+			});
+			out.push([t.id, typeof t.name === 'string' ? t.name : null, prereqs]);
+		});
+		return out;
+	}
 	minimise.topics = minimiseTopics;
+	minimise.courseTopics = courseTopics;
 	globalThis.__makgMinimise = minimise;
 })();
